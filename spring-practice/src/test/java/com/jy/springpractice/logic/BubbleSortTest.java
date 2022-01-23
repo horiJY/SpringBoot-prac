@@ -1,4 +1,4 @@
-package com.jy.logic;
+package com.jy.springpractice.logic;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

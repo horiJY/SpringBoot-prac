@@ -1,4 +1,4 @@
-package com.jy;
+package com.jy.springpractice;
 
 import org.junit.jupiter.api.Test;
 
