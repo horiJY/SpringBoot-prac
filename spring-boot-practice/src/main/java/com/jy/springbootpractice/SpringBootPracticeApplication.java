@@ -13,9 +13,7 @@ import org.springframework.context.event.EventListener;
 
 import lombok.RequiredArgsConstructor;
 
-import javax.annotation.PostConstruct;
-
-@EnableCaching // 캐시 활성화
+// @EnableCaching // 캐시 활성화
 // 스프링 캐시는 스프링 컨테이너의 모든 싱글톤 빈이 인스턴스화 된 이후에 동작하게끔 되어있으므로,`@PostConstruct` 시점에서
 // 동작을 보장할 수 없음
 // 스프링 부트 startup 이 끝난 직후 실행되는 다른 로직이 필요이에 `@EventListner` +
@@ -31,10 +29,13 @@ public class SpringBootPracticeApplication {
 
     private final StudentService studentService;
 
-    @EventListener(ApplicationReadyEvent.class) // 애플리케이션 준비가 끝났을 때, 모든 빈을 다 읽고 스프링컨테이너가 준비가 되었을 때
+    @EventListener(ApplicationReadyEvent.class) // 애플리케이션 준비가 끝났을 때, 모든 빈을 다 읽고 스프링컨테이너가 준비가 되었 때
     public void init() {
         studentService.printStudent("jack");
         studentService.printStudent("jack");
         studentService.printStudent("jack");
+        studentService.printStudent("fred");
+        studentService.printStudent("cassie");
+        studentService.printStudent("cassie");
     }
 }
