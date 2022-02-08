@@ -5,12 +5,19 @@ import java.util.Map;
 import com.jy.springbootpractice.domain.Student;
 
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.stereotype.Repository;
+import org.springframework.nativex.hint.AotProxyHint;
+import org.springframework.nativex.hint.ProxyBits;
+import org.springframework.stereotype.Component;
 
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-@Repository
+// @Repository
+// // Spring Native
+@Component
+// @AotProxyHint(targetClass =
+// com.jy.springbootpractice.repository.StudentRepository.class, proxyFeatures =
+// ProxyBits.IS_STATIC)
 public class StudentRepository {
 
     private final Map<String, Student> storage;
