@@ -18,24 +18,40 @@ import lombok.RequiredArgsConstructor;
 // 동작을 보장할 수 없음
 // 스프링 부트 startup 이 끝난 직후 실행되는 다른 로직이 필요이에 `@EventListner` +
 // `ApplicationReadyEvent` 를 이용해 해결
-@RequiredArgsConstructor
+// @RequiredArgsConstructor
 @SpringBootApplication
 @ConfigurationPropertiesScan
 public class SpringBootPracticeApplication {
+
+    private final StudentService studentService;
+    private final String username;
+    private final String password;
+
+    public SpringBootPracticeApplication(
+            StudentService studentService,
+            @Value("${spring.datasource.username}") String username,
+            @Value("${spring.datasource.password}") String password) {
+        this.studentService = studentService;
+        this.username = username;
+        this.password = password;
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(SpringBootPracticeApplication.class, args);
     }
 
-    private final StudentService studentService;
-
     @EventListener(ApplicationReadyEvent.class) // 애플리케이션 준비가 끝났을 때, 모든 빈을 다 읽고 스프링컨테이너가 준비가 되었 때
     public void init() {
-        studentService.printStudent("jack");
-        studentService.printStudent("jack");
-        studentService.printStudent("jack");
-        studentService.printStudent("fred");
-        studentService.printStudent("cassie");
-        studentService.printStudent("cassie");
+        // // redis
+        // studentService.printStudent("jack");
+        // studentService.printStudent("jack");
+        // studentService.printStudent("jack");
+        // studentService.printStudent("fred");
+        // studentService.printStudent("cassie");
+        // studentService.printStudent("cassie");
+
+        // // vault
+        System.out.println("vault id:" + username);
+        System.out.println("vault pw:" + password);
     }
 }
