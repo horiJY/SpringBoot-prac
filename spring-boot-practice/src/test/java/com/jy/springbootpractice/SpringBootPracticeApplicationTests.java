@@ -39,6 +39,7 @@ class SpringBootPracticeApplicationTests {
     // 테스트 컨테이너의 포트는 랜덤포트이다.
     @DynamicPropertySource // configuration poperties를 나중에 읽어서 주입하게 해줌, Spring Framework 5.2.5이상
     static void properties(DynamicPropertyRegistry registry) {
+        registry.add("spring.cache.type", () -> "redis");
         registry.add("spring.redis.port", () -> redisContainer.getMappedPort(6379));
         // spring.redis.port properties 값을 redisContainer의 6379포트와 대응되는 값을 가져와 덮어 씌움
     }
@@ -52,9 +53,9 @@ class SpringBootPracticeApplicationTests {
         GenericContainer.ExecResult execResult1 = redisContainer.execInContainer("redis-cli", "get", "student:cassie");
         GenericContainer.ExecResult execResult2 = redisContainer.execInContainer("redis-cli", "get", "student:fred");
         GenericContainer.ExecResult execResult3 = redisContainer.execInContainer("redis-cli", "get", "student:jack");
-        // System.out.println(execResult1.getStdout());
-        // System.out.println(execResult2.getStdout());
-        // System.out.println(execResult3.getStdout());
+        System.out.println(execResult1.getStdout());
+        System.out.println(execResult2.getStdout());
+        System.out.println(execResult3.getStdout());
 
         // execResult의 값을 표준출력으로 mapper를통해 가져와 Student에 넣는다.
         Student actual1 = mapper.readValue(execResult1.getStdout(), Student.class);
