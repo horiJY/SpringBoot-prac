@@ -16,25 +16,36 @@ repositories {
     mavenCentral()
 }
 
-// ext {
-//     set('springCloudVersion', "2020.0.3")
-// }
+ext {
+    set('testcontainersVersion', "1.15.3")
+    // springnative
+    // set('springCloudVersion', "2020.0.3")
+}
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     // implementation 'org.springframework.boot:spring-boot-starter-cache'
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
     // implementation 'org.springframework.cloud:spring-cloud-starter-vault-config'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+    testImplementation 'org.testcontainers:junit-jupiter'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
     compileOnly 'org.projectlombok:lombok'
+
     annotationProcessor 'org.projectlombok:lombok'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 }
 
-// dependencyManagement {
-//     imports {
-//         mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
-//     }
-// }
+dependencyManagement {
+    imports {
+            // testcontainers
+            mavenBom "org.testcontainers:testcontainers-bom:${testcontainersVersion}"
+            // spring native
+            // mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
 
 tasks.named('test') {
     useJUnitPlatform()

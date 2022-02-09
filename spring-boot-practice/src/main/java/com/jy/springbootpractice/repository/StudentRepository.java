@@ -1,23 +1,18 @@
 package com.jy.springbootpractice.repository;
 
-import java.util.Map;
-
-import com.jy.springbootpractice.domain.Student;
-
+import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.nativex.hint.AotProxyHint;
 import org.springframework.nativex.hint.ProxyBits;
 import org.springframework.stereotype.Component;
 
-import lombok.RequiredArgsConstructor;
+import java.util.Map;
 
+import com.jy.springbootpractice.domain.Student;
+
+@AotProxyHint(targetClass = com.jy.springbootpractice.repository.StudentRepository.class, proxyFeatures = ProxyBits.IS_STATIC)
 @RequiredArgsConstructor
-// @Repository
-// // Spring Native
 @Component
-// @AotProxyHint(targetClass =
-// com.jy.springbootpractice.repository.StudentRepository.class, proxyFeatures =
-// ProxyBits.IS_STATIC)
 public class StudentRepository {
 
     private final Map<String, Student> storage;
@@ -31,4 +26,5 @@ public class StudentRepository {
     public Student enroll(String name, Integer age, Student.Grade grade) {
         return storage.put(name, Student.of(name, age, grade));
     }
+
 }

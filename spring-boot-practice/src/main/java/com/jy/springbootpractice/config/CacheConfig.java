@@ -1,7 +1,5 @@
 package com.jy.springbootpractice.config;
 
-import java.time.Duration;
-
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
@@ -10,10 +8,12 @@ import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializationContext.SerializationPair;
 
+import java.time.Duration;
+
 @EnableCaching
 @Configuration
 public class CacheConfig extends CachingConfigurerSupport {
-
+    // java serialize -> jackson serialize
     @Bean
     public RedisCacheConfiguration redisCacheConfiguration() {
         return RedisCacheConfiguration.defaultCacheConfig()
@@ -21,4 +21,5 @@ public class CacheConfig extends CachingConfigurerSupport {
                 .entryTtl(Duration.ofSeconds(10))
                 .serializeValuesWith(SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer()));
     }
+
 }

@@ -1,13 +1,12 @@
 package com.jy.springbootpractice.service;
 
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
 import javax.annotation.PostConstruct;
 
 import com.jy.springbootpractice.domain.Student;
 import com.jy.springbootpractice.repository.StudentRepository;
-
-import org.springframework.stereotype.Service;
-
-import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service
@@ -23,7 +22,7 @@ public class StudentService {
     @PostConstruct
     public void init() {
         studentRepository.enroll("jack", 15, Student.Grade.B);
-        studentRepository.enroll("cassie", 17, Student.Grade.A);
-        studentRepository.enroll("fred", 13, Student.Grade.F);
+        studentRepository.enroll("cassie", 18, Student.Grade.A);
+        studentRepository.enroll("fred", 14, Student.Grade.C);
     }
 }
